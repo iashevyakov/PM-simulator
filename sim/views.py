@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+
+
 import random
 
 from django.http import HttpResponse, HttpResponseRedirect
@@ -8,8 +11,6 @@ from django.urls import reverse
 
 from sim.models import Question, Answer, Result, Param
 
-b = 5
-
 
 def base(request):
     if not request.session.session_key:
@@ -19,7 +20,7 @@ def base(request):
         result.value = param.default_value
         result.save()
     return HttpResponseRedirect(
-        reverse('sim:question', args=(Question.objects.get(type='st').id,)))
+        reverse('sim:question', args=(Question.objects.get(type='начало').id,)))
 
 
 def question(request, q_id):
@@ -39,7 +40,7 @@ def question(request, q_id):
             print(param.value_to_add)
             result.save()
         response = HttpResponseRedirect(
-            reverse('sim:question', args=(option.question_to.id,))) if question.type != 'end' else render(request,
+            reverse('sim:question', args=(option.question_to.id,))) if question.type != 'конец' else render(request,
                                                                                                           'sim/results.html',
                                                                                                           {
                                                                                                               'results': Result.objects.filter(

@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+
+
 from django.db import models
 
 
@@ -12,14 +15,14 @@ class Param(models.Model):
 
 
 QUESTION_CHOICES = (
-    ('st', 'START'),
-    ('cm', 'COMMON'),
-    ('end', 'END')
+    ('начало', 'Начальный'),
+    ('обычный', 'Обычный'),
+    ('конец', 'Конечный')
 )
 
 
 class Question(models.Model):
-    type = models.CharField(max_length=5, choices=QUESTION_CHOICES, default=QUESTION_CHOICES[1][0])
+    type = models.CharField(max_length=10, choices=QUESTION_CHOICES, default=QUESTION_CHOICES[1][0])
     name = models.TextField(unique=True)
 
     def __str__(self):
