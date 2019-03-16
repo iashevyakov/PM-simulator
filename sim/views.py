@@ -11,7 +11,7 @@ from sim.models import Question, Answer, Result, Param
 b = 5
 
 
-def ba(request):
+def base(request):
     if not request.session.session_key:
         request.session.save()
     for param in Param.objects.all():
@@ -22,7 +22,7 @@ def ba(request):
         reverse('sim:question', args=(Question.objects.get(type='st').id,)))
 
 
-def base(request, q_id):
+def question(request, q_id):
     question = Question.objects.get(id=q_id)
     question_answers = question.question_answers.all()
     response = render(request, 'sim/question.html', {'answers': question_answers})
