@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+
+
 import random
 
 from django.http import HttpResponse, HttpResponseRedirect
@@ -7,8 +10,6 @@ from django.shortcuts import render
 from django.urls import reverse
 
 from sim.models import Question, Answer, Result, Param
-
-b = 5
 
 
 def base(request):
