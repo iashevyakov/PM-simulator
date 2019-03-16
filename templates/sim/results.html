@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+Ваши очки:
+
+{% for result in results %}
+    {{ result.param }} = {{ result.value }}
+{% endfor %}
+<br>
+<a href="{% url 'sim:base' %}" role="button">Пройти заново</a>
+</body>
+</html>
