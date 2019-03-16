@@ -26,7 +26,9 @@ def base(request):
 def question(request, q_id):
     question = Question.objects.get(id=q_id)
     question_answers = question.question_answers.all()
-    response = render(request, 'sim/question.html', {'answers': question_answers})
+    results = Result.objects.filter(
+        session_key=request.session.session_key)
+    response = render(request, 'sim/question.html', {'answers': question_answers, 'results': results})
     if request.method == 'POST':
         answer = Answer.objects.get(question=question, text=request.POST['choice'])
         random_value = random.random()
@@ -41,8 +43,8 @@ def question(request, q_id):
             result.save()
         response = HttpResponseRedirect(
             reverse('sim:question', args=(option.question_to.id,))) if question.type != 'конец' else render(request,
-                                                                                                          'sim/results.html',
-                                                                                                          {
-                                                                                                              'results': Result.objects.filter(
-                                                                                                                  session_key=request.session.session_key)})
+                                                                                                            'sim/results.html',
+                                                                                                            {
+                                                                                                                'results': Result.objects.filter(
+                                                                                                                    session_key=request.session.session_key)})
     return response
