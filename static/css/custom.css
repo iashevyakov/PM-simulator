@@ -57,3 +57,11 @@ label {
     transform: rotateZ(0deg);
   }
 }
+
+body {
+  background: url("http://wellworthsurgical.com/wp-content/uploads/parser/work-desk-background-1.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+}

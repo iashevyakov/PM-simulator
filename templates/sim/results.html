@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,18 +7,23 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link href="{% static "css/custom.css" %}" type="text/css" rel="stylesheet"/>
 </head>
 <body>
 <div class="container">
-    <h3>Ваши очки:</h3>
-    <hr>
+    <div class="card border-0 shadow my-5">
+        <div class="card-body p-5">
+            <h3>Ваши очки:</h3>
+            <hr>
 
-    {% for result in results %}
-        {{ result.param }} = {{ result.value }}
-        <br>
-    {% endfor %}
-    <br>
-    <a href="{% url 'sim:base' %}" role="button">Пройти заново</a>
+            {% for result in results %}
+                {{ result.param }} = {{ result.value }}
+                <br>
+            {% endfor %}
+            <br>
+            <a href="{% url 'sim:base' %}" role="button">Пройти заново</a>
+        </div>
+    </div>
 </div>
 </body>
 </html>

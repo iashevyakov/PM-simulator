@@ -13,26 +13,32 @@
 </head>
 <body>
 <div class="container">
-    <br>
-    <h3>Ситуация</h3>
-    {{ answers.first.question.name }}
-    <hr>
-    <h3>Варианты решения</h3>
-    <br>
-    <form method="post">
-        {% csrf_token %}
-        {% for answer in answers %}
-            <label>
-                <input type="radio" name="choice" class="card-input-element d-none" value="{{ answer.text }}">
-                <div class=" card card-body bg-light d-flex flex-row justify-content-between align-items-center">
-                    {{ answer.text }}
-                </div>
-            </label>
-        {% endfor %}
-        <button type="submit" class="btn btn-primary labelText">
-            Отправить
-        </button>
-    </form>
+    <div class="card border-0 shadow my-5">
+        <div class="card-body p-5">
+            <br>
+            <h3>Ситуация</h3>
+            {{ answers.first.question.name }}
+            <hr>
+            <h3>Варианты решения</h3>
+            <br>
+            <form method="post">
+                {% csrf_token %}
+                {% for answer in answers %}
+                    <label>
+                        <input type="radio" name="choice" class="card-input-element d-none" value="{{ answer.text }}">
+                        <div class=" card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                            {{ answer.text }}
+                        </div>
+                    </label>
+                {% endfor %}
+                <br>
+                <br>
+                <button type="submit" class="btn btn-primary labelText">
+                    Отправить
+                </button>
+            </form>
+        </div>
+    </div>
 </div>
 </body>
 <script>
