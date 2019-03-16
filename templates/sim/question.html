@@ -1,20 +1,41 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Симулятор определения компетенций</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link href="{% static "css/custom.css" %}" type="text/css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
-{{ answers.first.question.name }}
-<form method="post">
-{% csrf_token %}
-    {% for answer in answers %}
-        <p>
-        <label>{{ answer.text }}</label>
-        <input name="choice" type="radio" value="{{ answer.text }}">
-        </p>
-    {% endfor %}
-    <input type="submit">
-</form>
+<div class="container">
+    <br>
+    <h3>Ситуация</h3>
+    {{ answers.first.question.name }}
+    <hr>
+    <h3>Варианты решения</h3>
+    <br>
+    <form method="post">
+        {% csrf_token %}
+        {% for answer in answers %}
+            <label>
+                <input type="radio" name="choice" class="card-input-element d-none" value="{{ answer.text }}">
+                <div class=" card card-body bg-light d-flex flex-row justify-content-between align-items-center">
+                    {{ answer.text }}
+                </div>
+            </label>
+        {% endfor %}
+        <input type="submit">
+    </form>
+</div>
 </body>
+<script>
+    $('.card-input-element').on('click', function () {
+        console.log($(this).prop('checked'));
+    });
+</script>
 </html>
