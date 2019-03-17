@@ -1,0 +1,13 @@
+<br>
+
+{{ option.name }}
+
+<br>
+Ваши очки:
+
+<br>
+{% for param, value in results.items %}
+    {{ param }} = {{ value.0 }} ({{ value.1 }})
+    <br>
+{% endfor %}
+<br>

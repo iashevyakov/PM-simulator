@@ -17,7 +17,7 @@
         <div class="card-body p-5">
             <br>
             <h3>Ситуация</h3>
-            {{ answers.first.question.name }}
+            <div id="q">{{ answers.first.question.name }}</div>
             <hr>
             <h3>Варианты решения</h3>
             <br>
@@ -31,25 +31,69 @@
                         </div>
                     </label>
                 {% endfor %}
-                Ваши очки:
-                <br>
-                {% for result in results %}
-                    {{ result.param }} = {{ result.value }}
+                <div id="results">
                     <br>
-                {% endfor %}
+                    {% if option %}
+                        {{ option.name }}
+                    {% endif %}
+                    <br>
+                    Ваши очки:
+
+                    <br>
+                    {% for result in results %}
+                        {{ result.param }} = {{ result.value }}
+                        <br>
+                    {% endfor %}
+                    <br>
+                </div>
                 <br>
-                <br>
-                <button type="submit" class="btn btn-primary labelText">
-                    Отправить
-                </button>
+
             </form>
+            <button id="send" class="btn btn-success labelText" disabled>
+                Применить
+            </button>
+            <a id="go" role="button" class="btn btn-info labelText" disabled>
+                {% if not end %}
+                    Перейти
+                {% else %}
+                    Завершить
+                {% endif %}
+            </a>
         </div>
     </div>
 </div>
 </body>
 <script>
+
+    sent = false;
+
     $('.card-input-element').on('click', function () {
         console.log($(this).prop('checked'));
+        send_button = $('#send');
+        if (!sent && send_button.is(':disabled')) {
+            send_button.prop('disabled', false);
+        }
+
     });
+    $('#send').click(function () {
+        question = $("#q").text();
+        answer = $("input[name='choice']:checked").val();
+        $.ajax({
+            url: '/sim/ajax_save',
+            type: 'get',
+            data: {'question': question, 'choice': answer},
+            dataType: 'json',
+            success: function (data) {
+                $('#results').html(data.points);
+                $('#go').prop({'disabled': false, 'href': data.jump});
+                $('#send').prop({'disabled': true});
+                sent = true;
+
+            },
+            error: function () {
+                alert("error");
+            },
+        })
+    })
 </script>
 </html>
