@@ -16,6 +16,17 @@
     <div class="card border-0 shadow my-5">
         <div class="card-body p-5">
             <br>
+            <div class="card border-dark mb-3" style="width: 25rem;">
+                <div class="card-header"><strong>Ваши текущие параметры</strong></div>
+                <div class="card-body" id="result">
+                    <br>
+                    {% for result in results %}
+                        {{ result.param }}: {{ result.value }}
+                        <br>
+                    {% endfor %}
+                </div>
+            </div>
+            <br>
             <h3>Ситуация</h3>
             <div id="q">{{ answers.first.question.name }}</div>
             <hr>
@@ -31,24 +42,27 @@
                         </div>
                     </label>
                 {% endfor %}
-                <div id="results">
-                    <br>
-                    {% if option %}
-                        {{ option.name }}
-                    {% endif %}
-                    <br>
-                    Ваши очки:
 
-                    <br>
-                    {% for result in results %}
-                        {{ result.param }} = {{ result.value }}
-                        <br>
-                    {% endfor %}
-                    <br>
-                </div>
-                <br>
+                {#                <div id="results">#}
+                {#                    <br>#}
+                {#                    {% if option %}#}
+                {#                        {{ option.name }}#}
+                {#                    {% endif %}#}
+                {#                    <br>#}
+                {#                    Ваши очки:#}
+                {##}
+                {#                    <br>#}
+                {#                    {% for result in results %}#}
+                {#                        {{ result.param }} = {{ result.value }}#}
+                {#                        <br>#}
+                {#                    {% endfor %}#}
+                {#                    <br>#}
+                {#                </div>#}
+                {##}
+
 
             </form>
+            <br>
             <button id="send" class="btn btn-success labelText" disabled>
                 Применить
             </button>
@@ -84,7 +98,7 @@
             data: {'question': question, 'choice': answer},
             dataType: 'json',
             success: function (data) {
-                $('#results').html(data.points);
+                $('#result').html(data.points);
                 $('#go').prop({'disabled': false, 'href': data.jump});
                 $('#send').prop({'disabled': true});
                 sent = true;

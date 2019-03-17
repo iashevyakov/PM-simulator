@@ -1,13 +1,6 @@
-<br>
-
-{{ option.name }}
-
-<br>
-Ваши очки:
-
+Событие : {{ option.name }}
 <br>
 {% for param, value in results.items %}
-    {{ param }} = {{ value.0 }} ({{ value.1 }})
+    {{ param }} : {{ value.0 }} ({{ value.1 }})
     <br>
 {% endfor %}
-<br>

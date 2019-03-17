@@ -13,12 +13,12 @@
 <div class="container">
     <div class="card border-0 shadow my-5">
         <div class="card-body p-5">
-            <h3>Ваши очки:</h3>
+            <h3>Результаты ваших параметров</h3>
             <hr>
 
             <br>
             {% for result in results %}
-                {{ result.param }} = {{ result.value }}
+                {{ result.param }}: {{ result.value }}
                 <br>
             {% endfor %}
             <br>
