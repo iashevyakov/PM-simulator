@@ -16,6 +16,16 @@
     <div class="card border-0 shadow my-5">
         <div class="card-body p-5">
             <br>
+            <div class="card border-dark mb-3" style="width: 25rem;">
+                <div class="card-header"><strong>Ваши текущие параметры</strong></div>
+                <div class="card-body">
+                    {% for result in results %}
+                        {{ result.param }}: {{ result.value }}
+                        <br>
+                    {% endfor %}
+                </div>
+            </div>
+            <br>
             <h3>Ситуация</h3>
             {{ answers.first.question.name }}
             <hr>
@@ -30,12 +40,6 @@
                             {{ answer.text }}
                         </div>
                     </label>
-                {% endfor %}
-                Ваши очки:
-                <br>
-                {% for result in results %}
-                    {{ result.param }} = {{ result.value }}
-                    <br>
                 {% endfor %}
                 <br>
                 <br>
