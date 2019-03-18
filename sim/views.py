@@ -74,15 +74,24 @@ def ajax_save(request):
 
     next = reverse('sim:question', args=(option.question_to_id,)) if option.question_to_id else reverse(
         'sim:results')
-    data = {'points': render_to_string('sim/points.html', {'option': option, 'results': params_result}),
+    prob = int((option.upper_line - option.bottom_line) * 100)
+    data = {'points': render_to_string('sim/points.html', {'option': option, 'prob': prob, 'results': params_result}),
             'jump': next}
     return JsonResponse(data)
 
 
 def results(request):
+    param1 = Param.objects.get(name='Деньги')
+    param2 = Param.objects.get(name='Прогресс')
+    param1_result = Result.objects.get(session_key=request.session.session_key, param=param1).value
+    param2_result = Result.objects.get(session_key=request.session.session_key, param=param2).value
+    comp_percent = 0.5 * 100 + 0.5 * param2_result if param1_result >= 0 else 0.5 * (
+            100 + param1_result) + 0.5 * param2_result
+    results = Result.objects.filter(
+        session_key=request.session.session_key)
     return render(request,
                   'sim/results.html',
                   {
-                      'results': Result.objects.filter(
-                          session_key=request.session.session_key),
+                      'results': results,
+                      'value': comp_percent
                   })

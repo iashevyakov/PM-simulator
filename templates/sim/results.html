@@ -13,9 +13,10 @@
 <div class="container">
     <div class="card border-0 shadow my-5">
         <div class="card-body p-5">
-            <h3>Результаты ваших параметров</h3>
+            <h3>Ваши результаты</h3>
             <hr>
-
+            Вы владеете компетенцией на {{ value }} %
+            <br>
             <br>
             {% for result in results %}
                 {{ result.param }}: {{ result.value }}

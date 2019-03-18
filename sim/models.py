@@ -44,7 +44,7 @@ class Answer(models.Model):
 # частные случае опции - риск и успех из дока
 class Option(models.Model):
     answer = models.ForeignKey(Answer, on_delete=models.CASCADE, related_name='answer_options')
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=300)
     bottom_line = models.FloatField()
     upper_line = models.FloatField()
     question_to = models.ForeignKey(Question, on_delete=models.CASCADE, null=True, blank=True)
@@ -62,7 +62,7 @@ class OptionParam(models.Model):
     value_to_add = models.FloatField()
 
     def __str__(self):
-        return '%s - %s' % (self.option, self.param)
+        return '%s - %s - (%s)' % (self.option, self.param, self.value_to_add)
 
     class Meta:
         unique_together = (('option', 'param'),)
